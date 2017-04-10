@@ -1,13 +1,13 @@
-#**Finding Lane Lines on the Road** 
+# **Finding Lane Lines on the Road** 
 
 <img src="result_solidYellowCurve.jpg" width="480" alt="Combined Image" />
 
-####My first project of the Udacity's 'Self Driving Car Nanodegree' was `Finding lane lines`.
-####In this project, I mainly considered **'How to erase outliers'**.
+#### My first project of the Udacity's 'Self Driving Car Nanodegree' was `Finding lane lines`.  
+#### In this project, I mainly considered **'How to erase outliers'**.
 
-####Here is my pipeline
+#### Here is my pipeline
 
-##**Step 1:** Find lines in image
+## **Step 1:** Find lines in image
 
 1. Set ROI(Region Of Interest)
   * To reduce computing cost
@@ -16,9 +16,9 @@
 4. Perform hough transform 
   * Get first candidates for real lane lines
  
-##**Step 2:** Find inliers & outliers
+## **Step 2:** Find inliers & outliers
 
-> ###**I used RANSAC algorithm to eliminate outliers.**
+> ### **I used RANSAC algorithm to eliminate outliers.**
 > *`RANSAC : Random Sample Consensus`*
 
 1. Interpolation
@@ -35,13 +35,13 @@
  * Compute distance between sample points and the min_cost line.
  - If distance > threshold : outliers (Erase it)
 
-##**Step 3:** Draw line in image
+## **Step 3:** Draw line in image
 
 *  Extrapolation using `fitline()` function after erasing outliers
 -  frame-to-frame smoothing (I got this idea from other SDC members. Thanks!) 
 
 
-##**Result of RANSAC**
+## **Result of RANSAC**
 
 <img src="check_1.png" width="360" alt="Combined Image" />    <img src="result3_check.png" width="360" alt="Combined Image" />
 
@@ -52,7 +52,7 @@ So I have tried RANSAC and this is the result.
 
 <img src="ransac_result.png" width="640" alt="Combined Image" /> 
 
-##**Result on Video**
+## **Result on Video**
 
 ### solidWhiteRight
 [![Video White](https://github.com/windowsub0406/SelfDrivingCarND/blob/master/SDC_project_1/result_white.gif?raw=true)](https://youtu.be/Un9S84z3U4w)
