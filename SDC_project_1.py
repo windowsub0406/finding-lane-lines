@@ -8,7 +8,7 @@ import cv2
 import random
 import os, sys
 
-# %matplotlib inline
+input_type = 'video' #'video' # 'image'
 
 # cap = cv2.VideoCapture('solidWhiteRight.mp4')
 # cap = cv2.VideoCapture('solidYellowLeft.mp4')
@@ -332,10 +332,28 @@ def detect_lanes_img(img):
     return final
 
 if __name__ == '__main__':
-    frame = cv2.imread('./test_images/blue.jpg')
-    if frame.shape[0] != 540:  # resizing for challenge video
-        frame = cv2.resize(frame, None, fx=3 / 4, fy=3 / 4, interpolation=cv2.INTER_AREA)
-    result = detect_lanes_img(frame)
+    if input_type == 'image':
+        frame = cv2.imread('./test_images/solidYellowCurve.jpg')
+        if frame.shape[0] != 540:  # resizing for challenge video
+            frame = cv2.resize(frame, None, fx=3 / 4, fy=3 / 4, interpolation=cv2.INTER_AREA)
+        result = detect_lanes_img(frame)
 
-    cv2.imshow('result', result)
-    cv2.waitKey(0)
+        cv2.imshow('result', result)
+        cv2.waitKey(0)
+
+    elif input_type == 'video':
+        while (cap.isOpened()):
+            ret, frame = cap.read()
+            if frame.shape[0] != 540:  # resizing for challenge video
+                frame = cv2.resize(frame, None, fx=3 / 4, fy=3 / 4, interpolation=cv2.INTER_AREA)
+            result = detect_lanes_img(frame)
+
+            cv2.imshow('result', result)
+
+            # out.write(frame)
+
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
+
+        cap.release()
+        cv2.destroyAllWindows()
